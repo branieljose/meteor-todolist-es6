@@ -37,9 +37,9 @@
 
 * it uses MongoDB, which is a pain to do reporting on
 
-* arrogant people look down upon it because it takes them 8x more time to build something than you can with Meteor
-
 * harder to scale out of the box
+
+* not many jobs out there for Meteor
 
 # Don't use Meteor with React or Angular
 
