@@ -14,4 +14,7 @@ Template.task.events({
   'click .delete'() {
     Tasks.remove(this._id);
   },
+  'change .hide-completed input'(event, instance) {
+    instance.state.set('hideCompleted', event.target.checked);
+  },
 });
