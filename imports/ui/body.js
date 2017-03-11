@@ -1,3 +1,4 @@
+import { Meteor } from 'meteor/meteor';
 import { Template } from 'meteor/templating';
 import { ReactiveDict } from 'meteor/reactive-dict';
 
@@ -8,6 +9,8 @@ import './body.html';
 
 Template.body.onCreated(function bodyOnCreated() {
   this.state = new ReactiveDict();
+  //added this in here because we removed the autopublish package:
+  Meteor.subscribe('tasks');
 });
 
 Template.body.helpers({
@@ -17,11 +20,14 @@ Template.body.helpers({
       // If hide completed is checked, filter tasks
       return Tasks.find({ checked: { $ne: true } }, { sort: { createdAt: -1 } });
     }
-    
+
     // Otherwise, return all of the tasks
 	  // Show newest tasks at the top
 	  return Tasks.find({}, { sort: { createdAt: -1 } });
 	},
+  incompleteCount() {
+    return Tasks.find({ checked: { $ne: true } }).count();
+  },
 });
 
 Template.body.events({
@@ -34,15 +40,21 @@ Template.body.events({
     const text = target.text.value;
  
     // Insert a task into the collection
-    Tasks.insert({
-      text,
-      createdAt: new Date(), // current time
-    });
+
+    //can't do this because got rid of the insecure package and I'm not exporting Tasks in the imports/api/tasks.js file like I am on line 6 of imports/api/tasks.js
+      // Tasks.insert({
+      //   text,
+      //   createdAt: new Date(), // current time
+      //   owner: Meteor.userId(),
+      //   username: Meteor.user().username,
+      // });
+    //need to do this now to call a method from imports/api/tasks.js
+    Meteor.call('tasks.insert', text);
  
     // Clear form
     target.text.value = '';
   },
   'change .hide-completed input'(event, instance) {
     instance.state.set('hideCompleted', event.target.checked);
-  },
+  }
 });
