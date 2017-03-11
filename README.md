@@ -187,3 +187,31 @@ import { ReactiveDict } from 'meteor/reactive-dict';
 ```
 
 then look in imports/ui/body.js of how we configure reactive-dict and use it to maintain scope
+
+## Testing
+
+different types of tests:
+
+Unit test: If you are testing one small module of your application, you are writing a unit test. You’ll need to stub and mock other modules that your module usually leverages in order to isolate each test. You’ll typically also need to spy on actions that the module takes to verify that they occur.
+
+Integration test: If you are testing that multiple modules behave properly in concert, you are writing an integration test. Such tests are much more complex and may require running code both on the client and on the server to verify that communication across that divide is working as expected. Typically an integration test will still isolate a part of the entire application and directly verify results in code.
+
+Acceptance test: If you want to write a test that can be run against any running version of your app and verifies at the browser level that the right things happen when you push the right buttons, then you are writing an acceptance test (sometimes called “end to end test”). Such tests typically try to hook into the application as little as possible, beyond perhaps setting up the right data to run a test against.
+
+Load test: Finally you may wish to test that your application works under typical load or see how much load it can handle before it falls over. This is called a load test or stress test. Such tests can be challenging to set up and typically aren’t run often but are very important for confidence before a big production launch.
+
+System test: Make sure your database backups aren't backing up an empty database or a database that has less data than it should.
+
+we use a test driver for the Mocha JavaScript test framework:
+
+```
+$ meteor add practicalmeteor:mocha
+```
+
+we can now run our app in test mode like this (we'll have to run it on a new port)
+
+```
+$ meteor test --driver-package practicalmeteor:mocha --port 3000
+```
+
+in imports/api/tasks.tests.js we write our test to check if a user can delete their own tasks
