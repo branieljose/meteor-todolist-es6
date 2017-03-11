@@ -6,7 +6,13 @@ import { Template } from 'meteor/templating';
 import { Tasks } from '../api/tasks.js';
  
 import './task.html';
- 
+
+Template.task.helpers({
+  isOwner() {
+    return this.owner === Meteor.userId();
+  },
+});
+
 Template.task.events({
   'click .toggle-checked'() {
 	//can't do this because got rid of the insecure package and I'm not exporting Tasks in the imports/api/tasks.js file like I am on line 6 of imports/api/tasks.js
@@ -23,5 +29,8 @@ Template.task.events({
     	//Tasks.remove(this._id);
 
     Meteor.call('tasks.remove', this._id);
+  },
+  'click .toggle-private'() {
+    Meteor.call('tasks.setPrivate', this._id, !this.private);
   },
 });
