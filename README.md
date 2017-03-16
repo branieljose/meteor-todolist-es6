@@ -3,6 +3,14 @@
 * super easy to do real time reactive apps 
 	* 8x faster to build a similar app with Express, Socket.io, React, Redux
 
+* call server side methods in the client
+
+* access and update the session in the client
+
+* amazing community focused on making things super easy to build and understand. Other frameworks are built by engineers that overengineer everything, and hence complicate usage of what they build.
+
+* tie session like variables to template files on the client (Reactive Vars)
+
 * automatically installs meteor packages when you run meteor to start the app
 
 * go ahead use node packages
