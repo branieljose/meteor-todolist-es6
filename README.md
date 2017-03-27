@@ -3,6 +3,10 @@
 * super easy to do real time reactive apps 
 	* 8x faster to build a similar app with Express, Socket.io, React, Redux
 
+* meteor toys 
+	* this meteor package: meteortoys:allthings let's you modify and check out the database and Session right in your browser while you're browsing through your site on localhost
+	* ctrl + m is all you need to do to launch it :)
+
 * call server side methods in the client
 
 * access and update the session in the client
